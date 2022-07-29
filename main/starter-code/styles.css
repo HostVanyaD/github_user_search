@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
+:root {
+    --primary-light-blue: #0079FF;
+    --primary-light-gray: #697C9A;
+    --primary-light-darkblue: #4B6A9B;
+    --primary-light-darkgray: #2B3442;
+    --primary-light-lightgray: #F6F8FF;
+    --primary-light-white: #FFFFFF;
+}
+
 * {
     font-family: 'Space Mono', monospace;
 }
 
 html {
     box-sizing: border-box;
-    background-color: #F6F8FF;
 }
 
 body {
@@ -18,6 +26,7 @@ body {
     max-width: 730px;
     font-size: 15px;
     line-height: 25px;
+    background-color: var(--primary-light-lightgray);
 }
 
 header {
@@ -33,6 +42,7 @@ header {
     font-weight: bold;
     font-size: 26px;
     line-height: 38px;
+    color: var(--primary-light-darkgray);
 }
 
 .theme--btn {
@@ -45,10 +55,15 @@ header {
     display: grid;
     grid-template-columns: 1fr 8fr 2fr 2fr;
     align-content: center;
-    background-color: #FFFFFF;
+    background-color: var(--primary-light-white);
     box-shadow: 0px 25px 10px -10px rgb(105 124 154 / 8%);
     border-radius: 12px;
     font-size: 25px;
+}
+
+.search--box--container:hover,
+.search--user:hover {
+    cursor: pointer;
 }
 
 .search--icon {
@@ -58,7 +73,8 @@ header {
 .search--user {
     border: none;
     font-size: 19px;
-    color: #222731;
+    color: var(--primary-light-darkgray);
+    background-color: inherit;
 }
 
 .search--user:focus-visible {
@@ -66,11 +82,11 @@ header {
 }
 
 .search--user::placeholder {
-    color: #4B6A9B;
+    color: var(--primary-light-darkblue);
 }
 
 .error {
-    color: #FFFFFF;
+    color: var(--primary-light-white);
     /* TODO: set the color to white and when no results - show in red(#F74646) color*/
     font-size: 15px;
     font-weight: bold;
@@ -82,18 +98,25 @@ header {
     border-radius: 10px;
     border: none;
     font-weight: 500;
-    background-color: #0079FF;
+    background-color: var(--primary-light-blue);
     color: #FFFFFF;
 }
 
+.search--btn:hover {
+    background-color: #60ABFF;
+}
+
 .user--profile {
-    display: grid;
+    /* display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: "top""bottom";
-    background-color: #FFFFFF;
+    grid-template-areas: "top""bottom"; */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-light-white);
     box-shadow: 0px 25px 10px -10px rgb(105 124 154 / 8%);
     border-radius: 12px;
     padding: 40px;
+    color: var(--primary-light-gray);
 }
 
 .profile--picture {
@@ -107,11 +130,9 @@ header {
 }
 
 .top {
-    grid-area: top;
     display: grid;
     grid: 3fr 4fr 7fr / 1fr 3fr;
     grid-template-areas: "picture details""picture details""picture bio";
-    color: #697C9A;
     text-align: start;
 }
 
@@ -127,14 +148,14 @@ header {
     grid-area: username;
     font-weight: bold;
     font-size: 26px;
-    color: #2B3442;
+    color: var(--primary-light-darkgray);
     margin-bottom: 0;
     margin-top: 0;
 }
 
 .tagname {
     grid-area: tagname;
-    color: #0079FF;
+    color: var(--primary-light-blue);
 }
 
 .joined {
@@ -149,5 +170,62 @@ header {
 }
 
 .bottom {
-    grid-area: bottom;
+    display: grid;
+    grid: 1fr 1fr / 1fr 3fr;
+    grid-template-areas: "none statistics""none contacts";
+    row-gap: 30px;
 }
+
+.statistics {
+    grid-area: statistics;
+    background-color: var(--primary-light-lightgray);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.statistics h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary-light-darkgray);
+    margin-top: 5px;
+}
+
+.contacts {
+    grid-area: contacts;
+    display: grid;
+    grid: 1fr 1fr / 1fr 1fr;
+    justify-items: start;
+    align-items: baseline;
+}
+
+.contacts a {
+    text-decoration: none;
+    color: var(--primary-light-darkblue);
+    column-gap: 10%;
+}
+
+.contacts a img {
+    margin: -3px 8px -3px 0;
+}
+
+.not--available {
+    opacity: 50%;
+}
+
+body.dark {
+    --primary-light-lightgray: #141D2F;
+    --primary-light-white: #1E2A47;
+    --primary-light-darkgray: #FFFFFF;
+    --primary-light-gray: #FFFFFF;
+    --primary-light-darkblue: #FFFFFF;
+}
+
+body.dark .contacts a img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(107deg) brightness(104%) contrast(105%);
+}
+
+/*------------ MEDIA QUERIES ------------*/
