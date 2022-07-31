@@ -1,12 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-    --primary-light-blue: #0079FF;
-    --primary-light-gray: #697C9A;
-    --primary-light-darkblue: #4B6A9B;
-    --primary-light-darkgray: #2B3442;
-    --primary-light-lightgray: #F6F8FF;
-    --primary-light-white: #FFFFFF;
+    /* Light mode */
+    --primary-blue: #0079FF;
+    --light-bg: #F6F8FF;
+    --light-container-bg: #FFFFFF;
+    --light-text: #697C9A;
+    --light-placeholder-links: #4B6A9B;
+    --light-headings: #2B3442;
+    --light-toggle-icon: url('./assets/icon-moon.svg');
+    --light-toggle-text: 'DARK';
+
+    /* Dark mode */
+    --dark-bg: #141D2F;
+    --dark-container-bg: #1E2A47;
+    --dark-text: #FFFFFF;
+    --dark-placeholder-links: #FFFFFF;
+    --dark-headings: #FFFFFF;
+    --dark-toggle-icon: url('./assets/icon-sun.svg');
+    --dark-toggle-text: 'LIGHT';
+
+    /* Default mode */
+    --bg-color: var(--light-bg);
+    --container-bg: var(--light-container-bg);
+    --text-color: var(--light-text);
+    --placeholder-links-color: var(--light-placeholder-links);
+    --heading-color: var(--light-headings);
+    --toggle-icon: var(--light-toggle-icon);
+    --toggle-text: var(--light-toggle-text);
+}
+
+#page.dark .contacts a img,
+#page.dark .theme--btn img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(107deg) brightness(104%) contrast(105%);
 }
 
 * {
@@ -15,18 +41,28 @@
 
 html {
     box-sizing: border-box;
+    background-color: var(--bg-color);
 }
 
 body {
+    text-align: -webkit-center;
+    margin: 11rem 0;
+    width: 100%;
+    background-color: var(--bg-color);
+}
+
+body .toggle--switch:checked {
+    background-color: var(--dark-bg);
+}
+
+#page {
     display: flex;
     flex-direction: column;
     gap: 23px;
-    margin: 25% auto;
-    text-align: center;
     max-width: 730px;
     font-size: 15px;
     line-height: 25px;
-    background-color: var(--primary-light-lightgray);
+    background-color: var(--bg-color);
 }
 
 header {
@@ -42,12 +78,49 @@ header {
     font-weight: bold;
     font-size: 26px;
     line-height: 38px;
-    color: var(--primary-light-darkgray);
+    color: var(--heading-color);
 }
 
-.theme--btn {
+#theme--btn {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.toggle--content {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-color);
+    background-color: inherit;
+    outline: none;
+    border: none;
     justify-self: end;
 }
+
+.toggle--content::before {
+    content: var(--toggle-text);
+}
+
+.toggle--content::after {
+    content: var(--toggle-icon);
+    position: relative;
+    top: 5px;
+}
+
+.toggle--switch:checked~#page {
+    --bg-color: var(--dark-bg);
+    --container-bg: var(--dark-container-bg);
+    --text-color: var(--dark-text);
+    --placeholder-links-color: var(--dark-placeholder-links);
+    --heading-color: var(--dark-headings);
+    --toggle-icon: var(--dark-toggle-icon);
+    --toggle-text: var(--dark-toggle-text);
+}
+
 
 .search--box--container {
     width: 100%;
@@ -55,7 +128,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 8fr 2fr 2fr;
     align-content: center;
-    background-color: var(--primary-light-white);
+    background-color: var(--container-bg);
     box-shadow: 0px 25px 10px -10px rgb(105 124 154 / 8%);
     border-radius: 12px;
     font-size: 25px;
@@ -73,7 +146,7 @@ header {
 .search--user {
     border: none;
     font-size: 19px;
-    color: var(--primary-light-darkgray);
+    color: var(--heading-color);
     background-color: inherit;
 }
 
@@ -82,11 +155,11 @@ header {
 }
 
 .search--user::placeholder {
-    color: var(--primary-light-darkblue);
+    color: var(--placeholder-links-color);
 }
 
 .error {
-    color: var(--primary-light-white);
+    color: var(--container-bg);
     /* TODO: set the color to white and when no results - show in red(#F74646) color*/
     font-size: 15px;
     font-weight: bold;
@@ -98,7 +171,7 @@ header {
     border-radius: 10px;
     border: none;
     font-weight: 500;
-    background-color: var(--primary-light-blue);
+    background-color: var(--primary-blue);
     color: #FFFFFF;
 }
 
@@ -112,11 +185,11 @@ header {
     grid-template-areas: "top""bottom"; */
     display: flex;
     flex-direction: column;
-    background-color: var(--primary-light-white);
+    background-color: var(--container-bg);
     box-shadow: 0px 25px 10px -10px rgb(105 124 154 / 8%);
     border-radius: 12px;
     padding: 40px;
-    color: var(--primary-light-gray);
+    color: var(--text-color);
 }
 
 .profile--picture {
@@ -148,14 +221,14 @@ header {
     grid-area: username;
     font-weight: bold;
     font-size: 26px;
-    color: var(--primary-light-darkgray);
+    color: var(--heading-color);
     margin-bottom: 0;
     margin-top: 0;
 }
 
 .tagname {
     grid-area: tagname;
-    color: var(--primary-light-blue);
+    color: var(--primary-blue);
 }
 
 .joined {
@@ -178,7 +251,7 @@ header {
 
 .statistics {
     grid-area: statistics;
-    background-color: var(--primary-light-lightgray);
+    background-color: var(--bg-color);
     border-radius: 10px;
     display: flex;
     justify-content: space-around;
@@ -190,7 +263,7 @@ header {
 .statistics h2 {
     font-size: 22px;
     font-weight: bold;
-    color: var(--primary-light-darkgray);
+    color: var(--heading-color);
     margin-top: 5px;
 }
 
@@ -204,7 +277,7 @@ header {
 
 .contacts a {
     text-decoration: none;
-    color: var(--primary-light-darkblue);
+    color: var(--placeholder-links-color);
     column-gap: 10%;
 }
 
@@ -214,18 +287,6 @@ header {
 
 .not--available {
     opacity: 50%;
-}
-
-body.dark {
-    --primary-light-lightgray: #141D2F;
-    --primary-light-white: #1E2A47;
-    --primary-light-darkgray: #FFFFFF;
-    --primary-light-gray: #FFFFFF;
-    --primary-light-darkblue: #FFFFFF;
-}
-
-body.dark .contacts a img {
-    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(107deg) brightness(104%) contrast(105%);
 }
 
 /*------------ MEDIA QUERIES ------------*/
