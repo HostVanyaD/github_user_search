@@ -159,6 +159,7 @@ header {
     box-shadow: 0px 25px 10px -10px rgb(105 124 154 / 8%);
     border-radius: 12px;
     font-size: 25px;
+    align-items: center;
 }
 
 .search--box--container:hover,
